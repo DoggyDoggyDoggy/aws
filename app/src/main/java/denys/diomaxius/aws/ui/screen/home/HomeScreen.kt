@@ -1,5 +1,6 @@
 package denys.diomaxius.aws.ui.screen.home
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
@@ -13,6 +14,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -37,6 +39,14 @@ fun HomeScreen(
         mutableStateOf(0)
     }
 
+    LaunchedEffect(menuItem) {
+        if (menuItem == 0) {
+            viewModel.loadTodayData()
+        } else {
+            viewModel.loadAllData()
+        }
+    }
+
     Scaffold(
         topBar = {
             TopBar()
@@ -45,7 +55,8 @@ fun HomeScreen(
         Content(
             modifier = Modifier.padding(innerPadding),
             soilMoistureItems = soilMoistureItems,
-            menuItem = menuItem
+            menuItem = menuItem,
+            changeMenuItem = { menuItem = it }
         )
     }
 }
@@ -54,7 +65,8 @@ fun HomeScreen(
 fun Content(
     modifier: Modifier = Modifier,
     soilMoistureItems: List<SoilMoisture>,
-    menuItem: Int
+    menuItem: Int,
+    changeMenuItem: (Int) -> Unit
 ) {
     Column(
         modifier = modifier.fillMaxSize()
@@ -63,7 +75,8 @@ fun Content(
             modifier = Modifier
                 .padding(horizontal = 8.dp)
                 .padding(top = 8.dp),
-            menuItem = menuItem
+            menuItem = menuItem,
+            changeMenuItem = changeMenuItem
         )
 
         LazyColumn {
@@ -77,7 +90,8 @@ fun Content(
 @Composable
 fun Menu(
     modifier: Modifier = Modifier,
-    menuItem: Int
+    menuItem: Int,
+    changeMenuItem: (Int) -> Unit
 ) {
     Row(
         modifier = modifier
@@ -86,7 +100,10 @@ fun Menu(
         Card(
             modifier = Modifier
                 .padding(vertical = 8.dp)
-                .padding(start = 8.dp, end = 4.dp),
+                .padding(start = 8.dp, end = 4.dp)
+                .clickable{
+                    changeMenuItem(0)
+                },
             colors = CardDefaults.cardColors(
                 containerColor = if (menuItem == 1) MaterialTheme.colorScheme.primaryContainer else
                     MaterialTheme.colorScheme.primary,
@@ -105,7 +122,10 @@ fun Menu(
 
         Card(
             modifier = Modifier
-                .padding(vertical = 8.dp, horizontal = 4.dp),
+                .padding(vertical = 8.dp, horizontal = 4.dp)
+                .clickable{
+                    changeMenuItem(1)
+                },
             colors = CardDefaults.cardColors(
                 containerColor = if (menuItem == 0) MaterialTheme.colorScheme.primaryContainer else
                     MaterialTheme.colorScheme.primary,
@@ -129,6 +149,7 @@ fun Menu(
 fun MenuPreview() {
     Menu(
         menuItem = 0,
-        modifier = Modifier
+        modifier = Modifier,
+        changeMenuItem = {}
     )
 }
