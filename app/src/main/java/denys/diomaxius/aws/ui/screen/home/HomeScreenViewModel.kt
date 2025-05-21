@@ -1,4 +1,4 @@
-package denys.diomaxius.aws.ui.screen
+package denys.diomaxius.aws.ui.screen.home
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
