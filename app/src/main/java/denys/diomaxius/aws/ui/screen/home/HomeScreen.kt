@@ -88,7 +88,7 @@ fun Menu(
                 .padding(vertical = 8.dp)
                 .padding(start = 8.dp, end = 4.dp),
             colors = CardDefaults.cardColors(
-                containerColor = if (menuItem == 0) MaterialTheme.colorScheme.primaryContainer else
+                containerColor = if (menuItem == 1) MaterialTheme.colorScheme.primaryContainer else
                     MaterialTheme.colorScheme.primary,
             ),
             elevation = CardDefaults.cardElevation(
@@ -107,7 +107,7 @@ fun Menu(
             modifier = Modifier
                 .padding(vertical = 8.dp, horizontal = 4.dp),
             colors = CardDefaults.cardColors(
-                containerColor = if (menuItem == 1) MaterialTheme.colorScheme.primaryContainer else
+                containerColor = if (menuItem == 0) MaterialTheme.colorScheme.primaryContainer else
                     MaterialTheme.colorScheme.primary,
             ),
             elevation = CardDefaults.cardElevation(

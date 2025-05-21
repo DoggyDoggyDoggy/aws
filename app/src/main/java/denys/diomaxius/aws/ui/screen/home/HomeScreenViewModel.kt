@@ -19,12 +19,18 @@ class HomeScreenViewModel @Inject constructor(
     val soilMoistureItems: StateFlow<List<SoilMoisture>> = _soilMoistureItems.asStateFlow()
 
     init {
-        loadAllData()
+        loadTodayData()
     }
 
     fun loadAllData() {
         viewModelScope.launch {
             _soilMoistureItems.value = soilRepository.fetchSoilData()
+        }
+    }
+
+    fun loadTodayData() {
+        viewModelScope.launch {
+            _soilMoistureItems.value = soilRepository.fetchTodaySoilData()
         }
     }
 }

@@ -8,4 +8,6 @@ class SoilRepository @Inject constructor(
     private val api: SoilApiService
 ) {
     suspend fun fetchSoilData() = api.getSoilData().items
+
+    suspend fun fetchTodaySoilData() = api.getTodaySoilData().items
 }
