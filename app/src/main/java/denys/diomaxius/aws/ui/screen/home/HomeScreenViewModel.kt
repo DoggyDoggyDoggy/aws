@@ -22,6 +22,12 @@ class HomeScreenViewModel @Inject constructor(
         loadTodayData()
     }
 
+    fun triggerSoilSensor(deviceId: String = "pi_soil_001") {
+        viewModelScope.launch {
+            soilRepository.triggerSoilSensor(deviceId)
+        }
+    }
+
     fun loadAllData() {
         viewModelScope.launch {
             _soilMoistureItems.value = soilRepository.fetchSoilData()

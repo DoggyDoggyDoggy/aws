@@ -6,7 +6,9 @@ import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import denys.diomaxius.aws.data.network.ApiModule
 import denys.diomaxius.aws.data.network.SoilApiService
+import denys.diomaxius.aws.data.network.TriggerApiService
 import denys.diomaxius.aws.data.repository.SoilRepository
+
 import javax.inject.Singleton
 
 @Module
@@ -14,9 +16,15 @@ import javax.inject.Singleton
 object AppModule {
     @Provides
     @Singleton
-    fun provideSoilApiService(): SoilApiService = ApiModule.retrofitService
+    fun provideSoilApiService(): SoilApiService = ApiModule.dataApi
+
+    @Provides
+    fun provideTriggerApi(): TriggerApiService = ApiModule.triggerApi
 
     @Provides
     @Singleton
-    fun provideSoilRepository(api: SoilApiService): SoilRepository = SoilRepository(api)
+    fun provideSoilRepository(
+        dataApi: SoilApiService,
+        triggerApi: TriggerApiService
+    ): SoilRepository = SoilRepository(dataApi, triggerApi)
 }

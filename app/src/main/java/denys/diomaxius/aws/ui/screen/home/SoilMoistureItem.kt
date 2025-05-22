@@ -113,8 +113,8 @@ fun SoilMoistureItem(item: SoilMoisture) {
 
 fun circleColor(soilMoister: Int) : Color {
     return when {
-        soilMoister < 120 -> Color.Red
-        soilMoister in 120..180 -> Color.Yellow
+        soilMoister < 150 -> Color.Red
+        soilMoister in 150..350 -> Color.Yellow
         else -> Color.Green
     }
 }
