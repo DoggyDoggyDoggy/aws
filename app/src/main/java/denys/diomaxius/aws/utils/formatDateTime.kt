@@ -8,7 +8,7 @@ import java.time.format.DateTimeFormatter
 fun date(timestampSeconds: Long): String {
     val dateTime = LocalDateTime.ofInstant(
         Instant.ofEpochSecond(timestampSeconds),
-        ZoneId.systemDefault()
+        ZoneId.of("Pacific/Auckland")
     )
 
     val formatter = DateTimeFormatter.ofPattern("dd MMM yyyy, HH:mm")
