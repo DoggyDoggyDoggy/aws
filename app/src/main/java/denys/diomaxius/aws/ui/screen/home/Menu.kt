@@ -33,7 +33,7 @@ fun Menu(
                     changeMenuItem(0)
                 },
             colors = CardDefaults.cardColors(
-                containerColor = if (menuItem == 1) MaterialTheme.colorScheme.primaryContainer else
+                containerColor = if (menuItem != 0) MaterialTheme.colorScheme.primaryContainer else
                     MaterialTheme.colorScheme.primary,
             ),
             elevation = CardDefaults.cardElevation(
@@ -55,7 +55,7 @@ fun Menu(
                     changeMenuItem(1)
                 },
             colors = CardDefaults.cardColors(
-                containerColor = if (menuItem == 0) MaterialTheme.colorScheme.primaryContainer else
+                containerColor = if (menuItem != 1) MaterialTheme.colorScheme.primaryContainer else
                     MaterialTheme.colorScheme.primary,
             ),
             elevation = CardDefaults.cardElevation(
@@ -65,6 +65,28 @@ fun Menu(
             Text(
                 modifier = Modifier.padding(8.dp),
                 text = "All data",
+                fontSize = 20.sp,
+                fontWeight = FontWeight.Normal
+            )
+        }
+
+        Card(
+            modifier = Modifier
+                .padding(vertical = 8.dp, horizontal = 4.dp)
+                .clickable{
+                    changeMenuItem(2)
+                },
+            colors = CardDefaults.cardColors(
+                containerColor = if (menuItem != 2) MaterialTheme.colorScheme.primaryContainer else
+                    MaterialTheme.colorScheme.primary,
+            ),
+            elevation = CardDefaults.cardElevation(
+                defaultElevation = 4.dp
+            )
+        ) {
+            Text(
+                modifier = Modifier.padding(8.dp),
+                text = "Charts",
                 fontSize = 20.sp,
                 fontWeight = FontWeight.Normal
             )

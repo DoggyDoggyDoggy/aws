@@ -25,6 +25,7 @@ class HomeScreenViewModel @Inject constructor(
     fun triggerSoilSensor(deviceId: String = "pi_soil_001") {
         viewModelScope.launch {
             soilRepository.triggerSoilSensor(deviceId)
+            loadTodayData()
         }
     }
 

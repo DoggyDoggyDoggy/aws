@@ -19,7 +19,7 @@ import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.unit.dp
 import denys.diomaxius.aws.data.model.SoilMoisture
@@ -31,7 +31,7 @@ fun HomeScreen(
 ) {
     val soilMoistureItems by viewModel.soilMoistureItems.collectAsState()
 
-    var menuItem by remember {
+    var menuItem by rememberSaveable {
         mutableStateOf(0)
     }
 
@@ -96,10 +96,18 @@ fun Content(
             changeMenuItem = changeMenuItem
         )
 
-        LazyColumn {
-            items(soilMoistureItems) { item ->
-                SoilMoistureItem(item)
+        if ( menuItem != 2){
+            LazyColumn(
+                reverseLayout = true
+            ) {
+                items(soilMoistureItems) { item ->
+                    SoilMoistureItem(item)
+                }
             }
+        } else {
+            ChartsScreen(
+                soilMoistureItems = soilMoistureItems
+            )
         }
     }
 }

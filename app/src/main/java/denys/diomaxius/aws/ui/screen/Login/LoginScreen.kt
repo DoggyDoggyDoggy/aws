@@ -25,6 +25,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
+import denys.diomaxius.aws.data.constants.UserLogin
 import denys.diomaxius.aws.navigation.Screen
 
 @Composable
@@ -122,11 +123,13 @@ fun LoginScreen(
                 .fillMaxWidth()
                 .height(60.dp),
             onClick = {
-                navHostController.navigate(Screen.Home.route) {
-                    popUpTo(Screen.Login.route) {
-                        inclusive = true
+                if (login == UserLogin.LOGIN && password == UserLogin.PASS) {
+                    navHostController.navigate(Screen.Home.route) {
+                        popUpTo(Screen.Login.route) {
+                            inclusive = true
+                        }
+                        launchSingleTop = true
                     }
-                    launchSingleTop = true
                 }
             }
         ) {
@@ -136,9 +139,6 @@ fun LoginScreen(
         }
     }
 }
-
-
-
 
 
 
